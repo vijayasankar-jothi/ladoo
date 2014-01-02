@@ -1,0 +1,63 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    
+     <style name="MainRowText">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:text"></item>
+        <item name="android:textColor">@color/row_item</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="MainRowText.Name">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="MainEditText">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/app_bg</item>
+        <item name="android:textColor">@color/item</item>
+        <item name="android:text"></item>
+        <item name="android:hint">Hint</item>
+        <item name="android:gravity">top</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:isScrollContainer">true</item>
+        <item name="android:paddingLeft">@dimen/default_item_padding</item>
+    </style>
+    
+     <style name="MainRowStatusImg">
+        <item name="android:layout_width">@dimen/default_item_padding</item>
+        <item name="android:layout_height">@dimen/default_item_padding</item>
+        <item name="android:padding">@dimen/default_page_padding</item>
+        <item name="android:background">@color/item</item>
+    </style>
+
+     <style name="DrawerText">
+        <item name="android:textColor">@color/drawer_item</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+</resources>

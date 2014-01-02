@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/task_main"
+    style="@style/MainEditText"
+    android:layout_margin="8dp"
+    android:background="@color/row_bg" >
+
+    <TextView
+        android:id="@+id/task_time"
+        style="@style/MainRowText"
+        android:text="time"/>
+
+    <TextView
+        android:id="@+id/task_name"
+        style="@style/MainRowText.Name"
+        android:layout_alignLeft="@+id/task_time"
+        android:layout_below="@id/task_time"
+        android:text="name" />
+
+
+</RelativeLayout>

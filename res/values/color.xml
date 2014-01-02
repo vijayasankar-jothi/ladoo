@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_bg">#DED5C6</color>
+    <color name="item">#000</color>
+    
+    
+    <color name="row_bg">#4033b5e5</color>
+    <color name="row_item">#fff</color>
+    
+    <color name="drawer_bg">#AA33b5e5</color>   
+    <color name="drawer_item">#fff</color>
+    
+    
+    
+</resources>
