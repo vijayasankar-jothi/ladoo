@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.droidfactory.ladoo.R;
 import com.droidfactory.ladoo.object.ParentObject;
 
-public class DrawerAdapter extends ArrayAdapter<ParentObject> {
+public class DrawerAdapter extends ArrayAdapter<ParentObject> { 
 
 	public DrawerAdapter(Context mContext, ArrayList<ParentObject> mTripsArray) {
 		super(mContext, R.layout.drawer_row, mTripsArray);
