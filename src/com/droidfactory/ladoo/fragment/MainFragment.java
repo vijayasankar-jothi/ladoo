@@ -40,6 +40,8 @@ import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.listener.ModelListener;
 import com.droidfactory.ladoo.object.ParentObject;
 import com.droidfactory.ladoo.task.ChildListLoader;
+import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+import com.haarman.listviewanimations.swinginadapters.prepared.SwingRightInAnimationAdapter;
 
 public class MainFragment extends ListFragment implements FragmentCommunicator,
 		LoaderManager.LoaderCallbacks<ParentObject> {
@@ -193,9 +195,15 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	}
 
 	private void initAdapters() {
-		adapter = new EventsAdapter(this, R.layout.events_list,
-				rows);
-		setListAdapter(adapter);
+		adapter = new EventsAdapter(this, R.layout.events_list,rows);
+		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(adapter);
+//		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(adapter);
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(swingRightInAnimationAdapter);
+//
+//		swingBottomInAnimationAdapter.setAbsListView(getListView());
+	    // Assign the ListView to the AnimationAdapter and vice versa
+		swingBottomInAnimationAdapter.setAbsListView(lv);
+	    setListAdapter(swingBottomInAnimationAdapter);
 		adapter.notifyDataSetChanged();
 	}
 
