@@ -174,6 +174,23 @@ public class Model {
 		close();
 		return parentsArray;
 	}
+	
+	public ArrayList<ParentObject> getCategoriesObjectArray() {
+		int i = 0;
+		ArrayList<ParentObject> parentsArray = new ArrayList<ParentObject>();
+		String[] categories_in_drawer = {"News Updates","Events","Photos","Galleries","Top Celebs","Trailers","Reviews","Natural Beauties"};
+		String[] categories_in_title = {"News Updates","Events","Photos","Galleries","Top Celebs","Trailers","Reviews","Natural Beauties"};
+		for (String cat_name : categories_in_drawer) {
+			String title = categories_in_title[i];
+			ParentObject pObj = new ParentObject();
+			pObj.parent_id = i; //TODO :: This is for demo
+			pObj.parent_name = cat_name;
+			pObj.parent_desc = title; //TODO :: This is for demo
+			parentsArray.add(pObj);
+			i++;
+		}
+		return parentsArray;
+	}
 
 	private ParentObject getChildObjectArray(ParentObject pObj, Cursor cursor) {
 		cursor.moveToFirst();

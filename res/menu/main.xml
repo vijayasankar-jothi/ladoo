@@ -1,23 +1,52 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/action_new"
-        android:orderInCategory="102"
-        android:showAsAction="ifRoom"
-        android:icon="@drawable/ic_new"
-        android:title="New"/>
+    <group android:id="@+id/group_news_updates">
+        <item android:id="@+id/movie"
+              android:title="Movie"
+              android:showAsAction="never" />
+        <item android:id="@+id/celebrity"
+              android:title="Celebrity"
+              android:showAsAction="never" />
+        <item android:id="@+id/game"
+              android:title="Game"
+              android:showAsAction="never" />
+    </group>
     
-    <item
-        android:id="@+id/action_delete"
-        android:orderInCategory="101"
-        android:showAsAction="ifRoom"
-        android:icon="@drawable/ic_discard"
-        android:title="Delete"/>
+    <group android:id="@+id/group_events">
+        <item android:id="@+id/movie_premiere"
+              android:title="Movie Premieres"
+              android:showAsAction="never" />
+        <item android:id="@+id/oscars"
+              android:title="Oscars"
+              android:showAsAction="never" />
+        <item android:id="@+id/cannes"
+              android:title="Cannes"
+              android:showAsAction="never" />
+        <item android:id="@+id/sandiego"
+              android:title="San Diego Comic-Con"
+              android:showAsAction="never" />
+    </group>
     
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+    <group android:id="@+id/group_photos">
+        <item android:id="@+id/clebrity_images"
+              android:title="Celebrity Images"
+              android:showAsAction="never" />
+        <item android:id="@+id/paparazzi"
+              android:title="Paparazzi Images"
+              android:showAsAction="never" />
+        <item android:id="@+id/tv_serial"
+              android:title="Tv Serial Stills"
+              android:showAsAction="never" />
+    </group>
+    
+    
+    <group android:id="@+id/group_reviews">
+        <item android:id="@+id/movie_review"
+              android:title="Movie Reviews"
+              android:showAsAction="never" />
+        <item android:id="@+id/game_review"
+              android:title="Game Reviews"
+              android:showAsAction="never" />
+    </group>
 
 </menu>

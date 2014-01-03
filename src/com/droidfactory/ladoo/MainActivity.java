@@ -50,6 +50,14 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// fragmentCommunicator not allowed to call when mPager is active
+		
+		return super.onPrepareOptionsMenu(menu);
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,11 +69,41 @@ public class MainActivity extends FragmentActivity {
 
 		Model model = new Model(this);
 		switch (item.getItemId()) {
-			case R.id.action_new:
+			case R.id.movie:
 				Intent intent = new Intent(this, NewParent.class);
 				startActivity(intent);
 				break;
-			case R.id.action_delete:
+			case R.id.celebrity:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.game:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.movie_premiere:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.oscars:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.cannes:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.sandiego:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.clebrity_images:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.paparazzi:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.tv_serial:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.movie_review:
+				model.deleteAParent(this, 1);
+				break;
+			case R.id.game_review:
 				model.deleteAParent(this, 1);
 				break;
 
@@ -101,9 +139,9 @@ public class MainActivity extends FragmentActivity {
 
 	private void initFirstTimeLoader() {
 		Model model = new Model(this);
-		parentObjArray = model.getParents();
+		parentObjArray = model.getCategoriesObjectArray();
 		int size_of_parent = parentObjArray.size();
-		int positionOfSelectedParent = size_of_parent - 1;
+		int positionOfSelectedParent = 0;
 		if (size_of_parent == 0) {
 			System.out.println("No parents to load");
 			if (mainFragment != null) {

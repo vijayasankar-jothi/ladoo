@@ -14,6 +14,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -97,6 +98,30 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 				saveNewChild(desc, v);
 			}
 		});
+	}
+	
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		
+		
+		menu.setGroupVisible(R.id.group_news_updates, false);
+		menu.setGroupVisible(R.id.group_events, false);
+		menu.setGroupVisible(R.id.group_photos, false);
+		menu.setGroupVisible(R.id.group_reviews, false);
+		
+		
+		
+		if(parent_id == 0){ // News updates
+			menu.setGroupVisible(R.id.group_news_updates, true);
+		}else if(parent_id == 1){ //Events
+			menu.setGroupVisible(R.id.group_events, true);
+		}else if(parent_id == 2){ //Photos
+			menu.setGroupVisible(R.id.group_photos, true);
+		}else if(parent_id == 6){ //Reviews
+			menu.setGroupVisible(R.id.group_reviews, true);
+		}
+		
 	}
 
 	private void saveNewChild(String desc, View save_button_view) {
