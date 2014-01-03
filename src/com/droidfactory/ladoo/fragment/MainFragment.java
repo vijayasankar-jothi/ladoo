@@ -2,6 +2,10 @@ package com.droidfactory.ladoo.fragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -29,6 +33,7 @@ import com.droidfactory.ladoo.DetailView;
 import com.droidfactory.ladoo.MainActivity;
 import com.droidfactory.ladoo.MainActivity.FragmentCommunicator;
 import com.droidfactory.ladoo.R;
+import com.droidfactory.ladoo.adapter.EventsAdapter;
 import com.droidfactory.ladoo.adapter.MainAdapter;
 import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.listener.ModelListener;
@@ -38,11 +43,12 @@ import com.droidfactory.ladoo.task.ChildListLoader;
 public class MainFragment extends ListFragment implements FragmentCommunicator, LoaderManager.LoaderCallbacks<ParentObject> {
 
 	private ListView lv;
-	public long parent_id = -1;
+	public int parent_id = -1;
 	public String parent_desc = null;
 	private Context mContext;
 	private EditText new_child_edit;
 	private View new_child_save;
+	private LinkedList<JSONObject> rows;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +59,28 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 		parent.removeViewAt(lvIndex);
 		RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(R.layout.fragment_main, container, false);
 		parent.addView(mLinearLayout, lvIndex, lv.getLayoutParams());
+		rows = new LinkedList<JSONObject>();
+		ArrayList<Integer> images = new ArrayList<Integer>();
+		images.add(R.drawable.app_bg);
+		images.add(R.drawable.img_one);
+		images.add(R.drawable.img_two);
+		images.add(R.drawable.img_three);
+		images.add(R.drawable.img_four);
+		images.add(R.drawable.img_five);
+		images.add(R.drawable.img_six);
+		images.add(R.drawable.img_seven);
+		for(int i=1;i<=7;i++){
+			JSONObject dummyObj = new JSONObject();
+			try {
+				dummyObj.put("title", "Title " + i);
+				dummyObj.put("sub_title", "Sub Title " + i);
+				dummyObj.put("image_id", images.get(i));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			rows.add(dummyObj);
+		}
 		return layout;
 	}
 
@@ -67,7 +95,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 		initListView(this.getView());
 		// Load data
 		initAdapters();
-		loadChildrens();
+//		loadChildrens();
 	}
 
 	private void initListView(final View rootView) {
@@ -152,7 +180,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	}
 
 	private void initAdapters() {
-		MainAdapter adapter = new MainAdapter(getActivity(), new ArrayList<Long>());
+		EventsAdapter adapter = new EventsAdapter(this,R.layout.events_list,rows);
 		setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
