@@ -16,14 +16,12 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewPager;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,13 +32,15 @@ import com.droidfactory.ladoo.MainActivity;
 import com.droidfactory.ladoo.MainActivity.FragmentCommunicator;
 import com.droidfactory.ladoo.R;
 import com.droidfactory.ladoo.adapter.EventsAdapter;
+import com.droidfactory.ladoo.adapter.HighAdapter;
 import com.droidfactory.ladoo.adapter.MainAdapter;
 import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.listener.ModelListener;
 import com.droidfactory.ladoo.object.ParentObject;
 import com.droidfactory.ladoo.task.ChildListLoader;
 
-public class MainFragment extends ListFragment implements FragmentCommunicator, LoaderManager.LoaderCallbacks<ParentObject> {
+public class MainFragment extends ListFragment implements FragmentCommunicator,
+		LoaderManager.LoaderCallbacks<ParentObject> {
 
 	private ListView lv;
 	public int parent_id = -1;
@@ -51,13 +51,16 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	private LinkedList<JSONObject> rows;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View layout = super.onCreateView(inflater, container, savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View layout = super.onCreateView(inflater, container,
+				savedInstanceState);
 		ListView lv = (ListView) layout.findViewById(android.R.id.list);
 		ViewGroup parent = (ViewGroup) lv.getParent();
 		int lvIndex = parent.indexOfChild(lv);
 		parent.removeViewAt(lvIndex);
-		RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(R.layout.fragment_main, container, false);
+		RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(
+				R.layout.fragment_main, container, false);
 		parent.addView(mLinearLayout, lvIndex, lv.getLayoutParams());
 		rows = new LinkedList<JSONObject>();
 		ArrayList<Integer> images = new ArrayList<Integer>();
@@ -69,7 +72,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 		images.add(R.drawable.img_five);
 		images.add(R.drawable.img_six);
 		images.add(R.drawable.img_seven);
-		for(int i=1;i<=7;i++){
+		for (int i = 1; i <= 7; i++) {
 			JSONObject dummyObj = new JSONObject();
 			try {
 				dummyObj.put("title", "Title " + i);
@@ -95,61 +98,48 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 		initListView(this.getView());
 		// Load data
 		initAdapters();
-//		loadChildrens();
+		// loadChildrens();
 	}
 
 	private void initListView(final View rootView) {
 		lv = (ListView) rootView.findViewById(android.R.id.list);
 		enableModal(lv);
 		lv.setItemsCanFocus(true);
-		lv.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.new_child, null));
-		saveButtonView(this.getView());
+		lv.addHeaderView(LayoutInflater.from(getActivity()).inflate(
+				R.layout.new_child, null));
+		viewPagerView(this.getView());
 		setListShown(false);
 	}
-	
-	private void saveButtonView(final View rootView) {
-		new_child_edit = ((EditText) rootView.findViewById(R.id.new_task_edit));
-		new_child_save = rootView.findViewById(R.id.new_task_save);
 
-		new_child_edit.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				new_child_save.setVisibility(View.VISIBLE);
-				return false;
-			}
-		});
+	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two,
+			R.drawable.img_three, R.drawable.img_four };
 
-		new_child_save.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String desc = new_child_edit.getText().toString();
-				saveNewChild(desc, v);
-			}
-		});
+	private void viewPagerView(final View rootView) {
+		ViewPager mViewPager;
+		mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
+		HighAdapter pAdapter = new HighAdapter(mContext, imageArray);
+		mViewPager.setAdapter(pAdapter);
+		mViewPager.setCurrentItem(0);
 	}
-	
-	
+
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
-		
-		
+
 		menu.setGroupVisible(R.id.group_news_updates, false);
 		menu.setGroupVisible(R.id.group_events, false);
 		menu.setGroupVisible(R.id.group_photos, false);
 		menu.setGroupVisible(R.id.group_reviews, false);
-		
-		
-		
-		if(parent_id == 0){ // News updates
+
+		if (parent_id == 0) { // News updates
 			menu.setGroupVisible(R.id.group_news_updates, true);
-		}else if(parent_id == 1){ //Events
+		} else if (parent_id == 1) { // Events
 			menu.setGroupVisible(R.id.group_events, true);
-		}else if(parent_id == 2){ //Photos
+		} else if (parent_id == 2) { // Photos
 			menu.setGroupVisible(R.id.group_photos, true);
-		}else if(parent_id == 6){ //Reviews
+		} else if (parent_id == 6) { // Reviews
 			menu.setGroupVisible(R.id.group_reviews, true);
 		}
-		
+
 	}
 
 	private void saveNewChild(String desc, View save_button_view) {
@@ -157,9 +147,10 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 			Model model = new Model(mContext);
 			Calendar cal_instance = Calendar.getInstance();
 			cal_instance.add(Calendar.MINUTE, 5);
-			model.addChildrens(desc, parent_id, cal_instance.getTimeInMillis(), 0, 0, 0);
+			model.addChildrens(desc, parent_id, cal_instance.getTimeInMillis(),
+					0, 0, 0);
 		}
-		
+
 		new_child_edit.setText("");
 		new_child_save.setVisibility(View.GONE);
 		loadChildrens();
@@ -171,16 +162,18 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	}
 
 	public void performActions(ListView lv, MenuItem item) {
-		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this.getListAdapter());
+		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this
+				.getListAdapter());
 		SparseBooleanArray checked = lv.getCheckedItemPositions();
 		switch (item.getItemId()) {
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 
 	private void initAdapters() {
-		EventsAdapter adapter = new EventsAdapter(this,R.layout.events_list,rows);
+		EventsAdapter adapter = new EventsAdapter(this, R.layout.events_list,
+				rows);
 		setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
@@ -202,7 +195,8 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	}
 
 	@Override
-	public void onLoadFinished(Loader<ParentObject> arg0, ParentObject result_trip_obj) {
+	public void onLoadFinished(Loader<ParentObject> arg0,
+			ParentObject result_trip_obj) {
 		if (isResumed()) {
 			setListShown(true);
 		} else {
@@ -219,16 +213,18 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id_what) {
-		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this.getListAdapter());
+		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this
+				.getListAdapter());
 		Long id = mainAdapter.getID(--position);
 		Intent intent = new Intent(getActivity(), DetailView.class);
 		intent.putExtra("id", id);
 		intent.putExtra("time", mainAdapter.getTime(id));
 		intent.putExtra("name", mainAdapter.getName(id));
-		intent.putExtra("status", mainAdapter.getStatus(id)); 
+		intent.putExtra("status", mainAdapter.getStatus(id));
 
 		getActivity().startActivity(intent);
-		((Activity) mContext).overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+		((Activity) mContext).overridePendingTransition(R.anim.slideinleft,
+				R.anim.slideoutleft);
 	}
 
 	public void onDeleted() {

@@ -5,26 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/new_task_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_marginTop="@dimen/default_item_padding"
-        android:layout_toLeftOf="@+id/new_task_save"
-        android:gravity="top"
-        android:minLines="2"
-        android:padding="@dimen/default_item_padding"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/new_task_save"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_social_send_now" 
-        android:visibility="gone" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 
 </RelativeLayout>

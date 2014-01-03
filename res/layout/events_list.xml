@@ -16,32 +16,29 @@
 
     <ImageView
         android:id="@+id/image"
-        android:scaleType="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_default_user_avatar"
+        android:scaleType="center"
         android:visibility="visible" />
 
     <TextView
         android:id="@+id/title"
-        android:singleLine="true"
-        android:ellipsize="end"      
-        android:text="Title" 
-        android:layout_gravity="top|left"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"		
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/sub_title"
-        android:singleLine="true"
-        android:ellipsize="end"      
-        android:layout_gravity="bottom|left"
-        android:text="Sub Title" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Sub Title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
 
 </FrameLayout>
