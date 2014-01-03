@@ -2,6 +2,7 @@ package com.droidfactory.ladoo;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -121,15 +122,21 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void setDrawerActionBarToggle() {
+		final ActionBar mActionBar = MainActivity.this.getActionBar();
+		
 		mDrawerToggle = new ActionBarDrawerToggle(this, mMainLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
 				invalidateOptionsMenu();
+				mActionBar.setTitle(mainFragment.parent_desc);
 			}
 
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
 				invalidateOptionsMenu();
+				
+				
+				mActionBar.setTitle("Categories");
 			}
 		};
 		mMainLayout.setDrawerListener(mDrawerToggle);

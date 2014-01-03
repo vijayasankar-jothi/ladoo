@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/highlight_drawer_list"
     android:padding="@dimen/default_item_padding" >
 
     <TextView
         android:id="@+id/parent_name"
-       	style="@style/DrawerText"/>
+       	style="@style/DrawerText"
+       	android:typeface="monospace"
+       	android:padding="8dp"
+       	/>
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_drawer_layout"
-    android:layout_width="280dp"
+    android:layout_width="200dp"
     android:layout_height="match_parent"
     android:background="@color/drawer_bg" 
     android:layout_gravity="start"

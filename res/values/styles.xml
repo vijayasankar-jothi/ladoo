@@ -15,6 +15,19 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+         <item name="android:actionBarStyle">@style/CustomActionBar</item> <!-- Action Bar style -->
+    </style>
+    
+    <style name="CustomActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/CustomActionBar.TitleTextStyle</item>
+        <item name="android:background">@color/highlight_activated_drawer</item>
+    </style>
+    
+    <style name="CustomActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/actionbar_text</item>
+        <item name="android:capitalize">words</item>
+        <item name="android:typeface">monospace</item>
     </style>
     
     

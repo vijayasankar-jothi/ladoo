@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/highlight_activated_drawer" android:state_activated="true"/> <!-- on selected state -->
+    <item android:drawable="@color/highlight_pressed_drawer" android:state_pressed="true"/> <!-- on click state -->
+    <item android:drawable="@color/highlight_pressed_drawer" android:state_focused="true"/> <!-- focused not visible-->
+    <item android:drawable="@color/highlight_pressed_drawer" android:state_hovered="true"/> <!-- hovered  not visible-->
+    <item android:drawable="@android:color/transparent"/> <!-- default state -->
+</selector>

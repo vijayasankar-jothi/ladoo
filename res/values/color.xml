@@ -3,12 +3,18 @@
     <color name="app_bg">#DED5C6</color>
     <color name="item">#000</color>
     
+    <color name="actionbar_text">#fff</color>
     
     <color name="row_bg">#4033b5e5</color>
     <color name="row_item">#fff</color>
     
     <color name="drawer_bg">#AA33b5e5</color>   
     <color name="drawer_item">#fff</color>
+    
+    <color name="highlight_color_default">#6633b5e5</color>
+    
+    <color name="highlight_pressed_drawer">#000</color>
+    <color name="highlight_activated_drawer">#000</color>
     
     
     

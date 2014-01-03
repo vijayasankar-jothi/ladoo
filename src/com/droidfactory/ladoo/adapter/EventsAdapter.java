@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.droidfactory.ladoo.EventsFragment;
 import com.droidfactory.ladoo.R;
 import com.droidfactory.ladoo.fragment.MainFragment;
+import com.droidfactory.ladoo.util.AndroidUtils;
 
 
 public class EventsAdapter extends ArrayAdapter<JSONObject> {
@@ -23,6 +24,8 @@ public class EventsAdapter extends ArrayAdapter<JSONObject> {
 
 	private final List<JSONObject> jsonRows;
 	private final Context mContext;
+	Typeface bi;
+	Typeface bc;
 
 
 	public EventsAdapter(MainFragment listFrag, int textViewResourceId, List<JSONObject> mListRows) {
@@ -30,6 +33,9 @@ public class EventsAdapter extends ArrayAdapter<JSONObject> {
 		this.jsonRows = mListRows;
 		this.mContext = listFrag.getActivity();
 		inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		bi = AndroidUtils.get(getContext(), "Roboto-BoldItalic");
+		bc = AndroidUtils.get(getContext(), "Roboto-Light");
 	}
 
 	@Override
@@ -53,6 +59,9 @@ public class EventsAdapter extends ArrayAdapter<JSONObject> {
 		holder.title = (TextView) rowView.findViewById(R.id.title);
 		holder.sub_title = (TextView) rowView.findViewById(R.id.sub_title);
 		holder.article_image = (ImageView) rowView.findViewById(R.id.image);
+		
+		holder.title.setTypeface(bi);
+		holder.sub_title.setTypeface(bc);
 
 		// Set tag
 		rowView.setTag(holder);

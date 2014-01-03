@@ -2,10 +2,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="120dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:padding="@dimen/default_page_padding" >
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp" >
 
     <View
         android:id="@+id/identifier_id"
@@ -16,10 +17,18 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="matrix"
         android:visibility="visible" />
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5000" >
+    </View>
 
     <TextView
         android:id="@+id/title"
@@ -29,7 +38,10 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:text="Title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff"
+        android:padding="4dp" />
 
     <TextView
         android:id="@+id/sub_title"
@@ -39,6 +51,9 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:text="Sub Title"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#fff"
+        android:padding="4dp" />
 
 </FrameLayout>
