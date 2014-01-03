@@ -43,6 +43,7 @@ public class MainActivity extends FragmentActivity {
 		if (savedInstanceState == null) {
 			initFirstTimeLoader();
 		}
+		
 	}
 
 	@Override

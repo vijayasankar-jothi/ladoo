@@ -32,6 +32,7 @@ import com.droidfactory.ladoo.DetailView;
 import com.droidfactory.ladoo.MainActivity;
 import com.droidfactory.ladoo.MainActivity.FragmentCommunicator;
 import com.droidfactory.ladoo.R;
+import com.droidfactory.ladoo.SwipeDismissListViewTouchListener;
 import com.droidfactory.ladoo.adapter.EventsAdapter;
 import com.droidfactory.ladoo.adapter.HighAdapter;
 import com.droidfactory.ladoo.adapter.MainAdapter;
@@ -57,6 +58,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		View layout = super.onCreateView(inflater, container,
 				savedInstanceState);
 		ListView lv = (ListView) layout.findViewById(android.R.id.list);
+		
 		ViewGroup parent = (ViewGroup) lv.getParent();
 		int lvIndex = parent.indexOfChild(lv);
 		parent.removeViewAt(lvIndex);
@@ -99,7 +101,25 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		initListView(this.getView());
 		// Load data
 		initAdapters();
-		// loadChildrens();
+		SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        lv,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                	rows.remove(position-1);
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+        lv.setOnTouchListener(touchListener);
+        lv.setOnScrollListener(touchListener.makeScrollListener());
 	}
 
 	private void initListView(final View rootView) {
@@ -114,6 +134,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 
 	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two,
 			R.drawable.img_three, R.drawable.img_four };
+	private EventsAdapter adapter;
 
 	private void viewPagerView(final View rootView) {
 		ViewPager mViewPager;
@@ -172,7 +193,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	}
 
 	private void initAdapters() {
-		EventsAdapter adapter = new EventsAdapter(this, R.layout.events_list,
+		adapter = new EventsAdapter(this, R.layout.events_list,
 				rows);
 		setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
