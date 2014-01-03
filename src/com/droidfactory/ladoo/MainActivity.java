@@ -1,10 +1,16 @@
 package com.droidfactory.ladoo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ActionBar;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -167,8 +173,8 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void drawDefaultListOfElements(int positionOfSelectedParent) {
-		
-		mDrawerList.setAdapter(new DrawerAdapter(this, parentObjArray));
+		DrawerAdapter drawer_adapter = new DrawerAdapter(this, parentObjArray);
+		mDrawerList.setAdapter(drawer_adapter);
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		mDrawerList.setItemChecked(positionOfSelectedParent, true);
 	}
@@ -176,11 +182,36 @@ public class MainActivity extends FragmentActivity {
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			mainFragment = new MainFragment();
-			mainFragment.parent_id = parentObjArray.get(position).parent_id;
-			mainFragment.parent_desc = parentObjArray.get(position).parent_desc;
-			replaceAFragment(R.id.fragment_container, mainFragment, "PARENT_TAG" + mainFragment.parent_id);
+			switch(position){
+			case 8:
+				{
+					Intent shareIntent;
+					try {
+					    getPackageManager().getPackageInfo("com.facebook.katana", 0);
+					     shareIntent=  new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/325124554230666"));
+					   } catch (Exception e) {
+					     shareIntent =  new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/overallsitecom"));
+					   }
+					startActivity(shareIntent);
+			        break;
+				}
+				case 9:
+				{
+					Intent shareIntent;
+					shareIntent =  new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/overallsite_"));
+					startActivity(shareIntent);
+			        break;				
+				}
+				default:
+				{
+					mainFragment = new MainFragment();
+					mainFragment.parent_id = parentObjArray.get(position).parent_id;
+					mainFragment.parent_desc = parentObjArray.get(position).parent_desc;
+					replaceAFragment(R.id.fragment_container, mainFragment, "PARENT_TAG" + mainFragment.parent_id);
 
+				}
+					
+			}
 			mDrawerList.setItemChecked(position, true);
 			setTitle(mainFragment.parent_desc);
 			closeDrawer();

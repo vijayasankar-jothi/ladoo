@@ -187,8 +187,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	}
 
 	public void performActions(ListView lv, MenuItem item) {
-		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this
-				.getListAdapter());
+		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this.getListAdapter());
 		SparseBooleanArray checked = lv.getCheckedItemPositions();
 		switch (item.getItemId()) {
 		default:
