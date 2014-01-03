@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/new_task_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -9,7 +8,8 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="50dp"
+        android:background="#FF8800" >
 
         <android.support.v4.view.PagerTitleStrip
             android:layout_width="wrap_content"

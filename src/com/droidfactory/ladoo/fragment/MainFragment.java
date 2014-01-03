@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -150,7 +151,6 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 			model.addChildrens(desc, parent_id, cal_instance.getTimeInMillis(),
 					0, 0, 0);
 		}
-
 		new_child_edit.setText("");
 		new_child_save.setVisibility(View.GONE);
 		loadChildrens();
