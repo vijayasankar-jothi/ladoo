@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -143,11 +142,9 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		HighAdapter pAdapter = new HighAdapter(mContext, imageArray);
 		mViewPager.setAdapter(pAdapter);
-
 		CirclePageIndicator circleIndicator = (CirclePageIndicator) rootView
 				.findViewById(R.id.indicator);
 		circleIndicator.setViewPager(mViewPager);
-		
 		mViewPager.setCurrentItem(0);
 	}
 
@@ -200,15 +197,18 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	}
 
 	private void initAdapters() {
-		adapter = new EventsAdapter(this, R.layout.events_list,rows);
-		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(adapter);
-//		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(adapter);
-		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(swingRightInAnimationAdapter);
-//
-//		swingBottomInAnimationAdapter.setAbsListView(getListView());
-	    // Assign the ListView to the AnimationAdapter and vice versa
+		adapter = new EventsAdapter(this, R.layout.events_list, rows);
+		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(
+				adapter);
+		// SwingRightInAnimationAdapter swingRightInAnimationAdapter = new
+		// SwingRightInAnimationAdapter(adapter);
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+				swingRightInAnimationAdapter);
+		//
+		// swingBottomInAnimationAdapter.setAbsListView(getListView());
+		// Assign the ListView to the AnimationAdapter and vice versa
 		swingBottomInAnimationAdapter.setAbsListView(lv);
-	    setListAdapter(swingBottomInAnimationAdapter);
+		setListAdapter(swingBottomInAnimationAdapter);
 		adapter.notifyDataSetChanged();
 	}
 
