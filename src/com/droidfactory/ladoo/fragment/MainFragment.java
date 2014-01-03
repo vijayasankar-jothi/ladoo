@@ -213,15 +213,8 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id_what) {
-		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this
-				.getListAdapter());
-		Long id = mainAdapter.getID(--position);
 		Intent intent = new Intent(getActivity(), DetailView.class);
-		intent.putExtra("id", id);
-		intent.putExtra("time", mainAdapter.getTime(id));
-		intent.putExtra("name", mainAdapter.getName(id));
-		intent.putExtra("status", mainAdapter.getStatus(id));
-
+		intent.putExtra("position", position);
 		getActivity().startActivity(intent);
 		((Activity) mContext).overridePendingTransition(R.anim.slideinleft,
 				R.anim.slideoutleft);
