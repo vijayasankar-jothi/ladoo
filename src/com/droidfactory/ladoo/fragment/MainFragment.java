@@ -42,6 +42,7 @@ import com.droidfactory.ladoo.object.ParentObject;
 import com.droidfactory.ladoo.task.ChildListLoader;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingRightInAnimationAdapter;
+import com.viewpagerindicator.CirclePageIndicator;
 
 public class MainFragment extends ListFragment implements FragmentCommunicator,
 		LoaderManager.LoaderCallbacks<ParentObject> {
@@ -60,7 +61,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		View layout = super.onCreateView(inflater, container,
 				savedInstanceState);
 		ListView lv = (ListView) layout.findViewById(android.R.id.list);
-		
+
 		ViewGroup parent = (ViewGroup) lv.getParent();
 		int lvIndex = parent.indexOfChild(lv);
 		parent.removeViewAt(lvIndex);
@@ -103,25 +104,24 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		initListView(this.getView());
 		// Load data
 		initAdapters();
-		SwipeDismissListViewTouchListener touchListener =
-                new SwipeDismissListViewTouchListener(
-                        lv,
-                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                            @Override
-                            public boolean canDismiss(int position) {
-                                return true;
-                            }
+		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
+				lv, new SwipeDismissListViewTouchListener.DismissCallbacks() {
+					@Override
+					public boolean canDismiss(int position) {
+						return true;
+					}
 
-                            @Override
-                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                	rows.remove(position-1);
-                                }
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
-        lv.setOnTouchListener(touchListener);
-        lv.setOnScrollListener(touchListener.makeScrollListener());
+					@Override
+					public void onDismiss(ListView listView,
+							int[] reverseSortedPositions) {
+						for (int position : reverseSortedPositions) {
+							rows.remove(position - 1);
+						}
+						adapter.notifyDataSetChanged();
+					}
+				});
+		lv.setOnTouchListener(touchListener);
+		lv.setOnScrollListener(touchListener.makeScrollListener());
 	}
 
 	private void initListView(final View rootView) {
@@ -143,6 +143,11 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		HighAdapter pAdapter = new HighAdapter(mContext, imageArray);
 		mViewPager.setAdapter(pAdapter);
+
+		CirclePageIndicator circleIndicator = (CirclePageIndicator) rootView
+				.findViewById(R.id.indicator);
+		circleIndicator.setViewPager(mViewPager);
+		
 		mViewPager.setCurrentItem(0);
 	}
 

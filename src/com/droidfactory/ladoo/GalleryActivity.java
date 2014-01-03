@@ -12,7 +12,7 @@ public class GalleryActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery);
-		initGallery();
+		Bundle extras = getIntent().getExtras();
 	}
 
 	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two,

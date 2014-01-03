@@ -56,8 +56,8 @@ public class DetailView extends Activity {
 	}
 	
 	private void setViewHolder(ViewHolder vh) {
-		vh.txt1 = (TextView) findViewById(R.id.textView1);
-		vh.txt2 = (TextView) findViewById(R.id.textView2);
+		vh.txt1 = (TextView) findViewById(R.id.header_text);
+		vh.txt2 = (TextView) findViewById(R.id.desc_text);
 		vh.image_one = (ImageView) findViewById(R.id.header_image);
 	}
 	class ViewHolder {
