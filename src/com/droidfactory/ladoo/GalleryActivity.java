@@ -1,26 +1,36 @@
 package com.droidfactory.ladoo;
 
-import com.droidfactory.ladoo.adapter.HighAdapter;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+
+import com.droidfactory.ladoo.adapter.GridAdapter;
 
 public class GalleryActivity extends Activity {
+
+	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two,
+			R.drawable.img_three, R.drawable.img_four, R.drawable.image_five,
+			R.drawable.img_six, R.drawable.img_seven };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gallery);
-		Bundle extras = getIntent().getExtras();
+		GridView gridView = (GridView) findViewById(R.id.galleryGrid);
+		GridAdapter gridadapter = new GridAdapter(this, imageArray);
+		gridView.setAdapter(gridadapter);
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				
+				
+			}
+		});
+		getActionBar().setTitle("Gallery");
 	}
 
-	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two,
-			R.drawable.img_three, R.drawable.img_four };
-
-	private void initGallery() {
-		ViewPager mViewPager;
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		HighAdapter pAdapter = new HighAdapter(getBaseContext(), imageArray);
-	}
 }

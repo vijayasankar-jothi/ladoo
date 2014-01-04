@@ -49,7 +49,7 @@ public class MainActivity extends FragmentActivity {
 		if (savedInstanceState == null) {
 			initFirstTimeLoader();
 		}
-		
+
 	}
 
 	@Override
@@ -58,12 +58,11 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// fragmentCommunicator not allowed to call when mPager is active
-		
+
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -77,43 +76,43 @@ public class MainActivity extends FragmentActivity {
 
 		Model model = new Model(this);
 		switch (item.getItemId()) {
-			case R.id.movie:
-				Intent intent = new Intent(this, NewParent.class);
-				startActivity(intent);
-				break;
-			case R.id.celebrity:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.game:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.movie_premiere:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.oscars:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.cannes:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.sandiego:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.clebrity_images:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.paparazzi:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.tv_serial:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.movie_review:
-				model.deleteAParent(this, 1);
-				break;
-			case R.id.game_review:
-				model.deleteAParent(this, 1);
-				break;
+		case R.id.movie:
+			Intent intent = new Intent(this, NewParent.class);
+			startActivity(intent);
+			break;
+		case R.id.celebrity:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.game:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.movie_premiere:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.oscars:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.cannes:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.sandiego:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.clebrity_images:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.paparazzi:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.tv_serial:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.movie_review:
+			model.deleteAParent(this, 1);
+			break;
+		case R.id.game_review:
+			model.deleteAParent(this, 1);
+			break;
 
 		}
 		return true;
@@ -123,15 +122,19 @@ public class MainActivity extends FragmentActivity {
 		mMainLayout = (DrawerLayout) findViewById(R.id.main_layout_with_drawer);
 		mDrawerMainLayout = (RelativeLayout) findViewById(R.id.main_drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
-		mMainLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-		mMainLayout.setScrimColor(this.getResources().getColor(R.color.scrim_bg));
+		mMainLayout.setDrawerShadow(R.drawable.drawer_shadow,
+				GravityCompat.START);
+		mMainLayout.setScrimColor(this.getResources()
+				.getColor(R.color.scrim_bg));
 		setDrawerActionBarToggle();
 	}
 
 	private void setDrawerActionBarToggle() {
 		final ActionBar mActionBar = MainActivity.this.getActionBar();
-		
-		mDrawerToggle = new ActionBarDrawerToggle(this, mMainLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+
+		mDrawerToggle = new ActionBarDrawerToggle(this, mMainLayout,
+				R.drawable.ic_drawer, R.string.drawer_open,
+				R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
 				invalidateOptionsMenu();
@@ -141,8 +144,7 @@ public class MainActivity extends FragmentActivity {
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
 				invalidateOptionsMenu();
-				
-				
+
 				mActionBar.setTitle("Categories");
 			}
 		};
@@ -179,38 +181,51 @@ public class MainActivity extends FragmentActivity {
 		mDrawerList.setItemChecked(positionOfSelectedParent, true);
 	}
 
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+	private class DrawerItemClickListener implements
+			ListView.OnItemClickListener {
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			switch(position){
-			case 8:
-				{
-					Intent shareIntent;
-					try {
-					    getPackageManager().getPackageInfo("com.facebook.katana", 0);
-					     shareIntent=  new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/325124554230666"));
-					   } catch (Exception e) {
-					     shareIntent =  new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/overallsitecom"));
-					   }
-					startActivity(shareIntent);
-			        break;
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			switch (position) {
+			case 8: {
+				Intent shareIntent;
+				try {
+					getPackageManager()
+							.getPackageInfo("com.facebook.katana", 0);
+					shareIntent = new Intent(Intent.ACTION_VIEW,
+							Uri.parse("fb://profile/325124554230666"));
+				} catch (Exception e) {
+					shareIntent = new Intent(
+							Intent.ACTION_VIEW,
+							Uri.parse("https://www.facebook.com/overallsitecom"));
 				}
-				case 9:
-				{
-					Intent shareIntent;
-					shareIntent =  new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/overallsite_"));
-					startActivity(shareIntent);
-			        break;				
-				}
-				default:
-				{
-					mainFragment = new MainFragment();
-					mainFragment.parent_id = parentObjArray.get(position).parent_id;
-					mainFragment.parent_desc = parentObjArray.get(position).parent_desc;
-					replaceAFragment(R.id.fragment_container, mainFragment, "PARENT_TAG" + mainFragment.parent_id);
+				startActivity(shareIntent);
+				break;
+			}
+			case 9: {
+				Intent shareIntent;
+				shareIntent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse("https://twitter.com/overallsite_"));
+				startActivity(shareIntent);
+				break;
+			}
+			case 3: {
+				Intent galleryIntent;
+				galleryIntent = new Intent(getBaseContext(),
+						GalleryActivity.class);
+				startActivity(galleryIntent);
+				break;
 
-				}
-					
+			}
+			default: {
+				mainFragment = new MainFragment();
+				mainFragment.parent_id = parentObjArray.get(position).parent_id;
+				mainFragment.parent_desc = parentObjArray.get(position).parent_desc;
+				replaceAFragment(R.id.fragment_container, mainFragment,
+						"PARENT_TAG" + mainFragment.parent_id);
+
+			}
+
 			}
 			mDrawerList.setItemChecked(position, true);
 			setTitle(mainFragment.parent_desc);
@@ -219,14 +234,17 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	public void addAFragment(int frag_container, Fragment aFragment, String tag) {
-		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
 		transaction.add(frag_container, aFragment, tag);
 		transaction.commit();
 		this.getSupportFragmentManager().executePendingTransactions();
 	}
 
-	public void replaceAFragment(int frag_container, Fragment aFragment, String tag) {
-		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+	public void replaceAFragment(int frag_container, Fragment aFragment,
+			String tag) {
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
 		// transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
 		transaction.replace(frag_container, aFragment, tag);
 		// transaction.addToBackStack(null); //Don't enable this unless you need
@@ -240,18 +258,18 @@ public class MainActivity extends FragmentActivity {
 	public void closeDrawer() {
 		mMainLayout.closeDrawer(mDrawerMainLayout);
 	}
-	
-	@Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
 
 }

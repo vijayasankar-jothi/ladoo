@@ -20,8 +20,9 @@
             android:id="@+id/header_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="#9933CC"
+            android:background="#4033b5e5"
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 

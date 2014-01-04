@@ -27,9 +27,12 @@ public class DetailView extends Activity {
 	ArrayList<String> article_contents;
 	ArrayList<Integer> article_images;
 	private int position;
-	String[] titles = {"","3 Days to Kill","Kaley Cuoco","Welcome to Yesterday","Academy Awards","Best Film Trailers of All Times","Do Movie Critics Play a Significant..","Lady Gaga"};
+	String[] titles = { "", "3 Days to Kill", "Kaley Cuoco",
+			"Welcome to Yesterday", "Academy Awards",
+			"Best Film Trailers of All Times",
+			"Do Movie Critics Play a Significant..", "Lady Gaga" };
 	private ShareActionProvider mShareActionProvider;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,38 +87,39 @@ public class DetailView extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.details, menu);
 		MenuItem shareItem = menu.findItem(R.id.menu_share);
-	    mShareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
-	    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-	    shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		mShareActionProvider = (ShareActionProvider) shareItem
+				.getActionProvider();
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 		shareIntent.putExtra(Intent.EXTRA_SUBJECT, titles[position]);
 		shareIntent.putExtra(Intent.EXTRA_TEXT, article_contents.get(position));
-	    shareIntent.setType("*/*");
-	    mShareActionProvider.setShareIntent(shareIntent);
-	
+		shareIntent.setType("*/*");
+		mShareActionProvider.setShareIntent(shareIntent);
+
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	private Intent getDefaultIntent() {
-	    Intent intent = new Intent(Intent.ACTION_SEND);
-	    intent.setType("image/*");
-	    return intent;
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("image/*");
+		return intent;
 	}
-	
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// fragmentCommunicator not allowed to call when mPager is active
-		
+
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
 	private void populateView(ViewHolder vh) {
+		getActionBar().setTitle(titles[position]);
 		vh.txt1.setText(titles[position]);
 		vh.txt2.setText(article_contents.get(position));
 		vh.image_one.setImageDrawable(getResources().getDrawable(
 				article_images.get(position)));
-        SlidingUpPanelLayout layout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        layout.setDragView(vh.txt1);
+		SlidingUpPanelLayout layout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+		layout.setDragView(vh.txt1);
 	}
 
 	private void setViewHolder(ViewHolder vh) {
