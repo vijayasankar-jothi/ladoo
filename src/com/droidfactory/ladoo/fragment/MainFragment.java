@@ -8,9 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -37,7 +36,6 @@ import com.droidfactory.ladoo.SwipeDismissListViewTouchListener;
 import com.droidfactory.ladoo.adapter.EventsAdapter;
 import com.droidfactory.ladoo.adapter.HighAdapter;
 import com.droidfactory.ladoo.adapter.MainAdapter;
-import com.droidfactory.ladoo.adapter.NewParentAdapter;
 import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.listener.ModelListener;
 import com.droidfactory.ladoo.object.ParentObject;
@@ -333,12 +331,25 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	public void onListItemClick(ListView l, View v, int position, long id_what) {
 		Intent intent = new Intent(getActivity(), DetailView.class);
 		intent.putExtra("position", position);
-		getActivity().startActivity(intent);
+		
+		if (isJellyBeanCombCompatible()) {
+			Bundle scaleBundle = ActivityOptions.makeScaleUpAnimation(v, 30, 30, v.getWidth(), v.getHeight()).toBundle();
+			getActivity().startActivity(intent, scaleBundle);
+		} else {
+			getActivity().startActivity(intent);
+			((Activity) mContext).overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+		}
+		
+		
 		((Activity) mContext).overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
 	}
 
 	public void onDeleted() {
 		loadChildrens();
+	}
+	
+	public static boolean isJellyBeanCombCompatible() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
 	}
 
 }

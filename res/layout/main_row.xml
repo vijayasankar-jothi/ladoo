@@ -3,7 +3,7 @@
     android:id="@+id/task_main"
     style="@style/MainEditText"
     android:layout_margin="8dp"
-    android:background="@color/row_bg" >
+    android:background="@drawable/highlight_drawer_list" >
 
     <TextView
         android:id="@+id/task_time"
