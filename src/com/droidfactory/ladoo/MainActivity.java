@@ -124,7 +124,7 @@ public class MainActivity extends FragmentActivity {
 		mDrawerMainLayout = (RelativeLayout) findViewById(R.id.main_drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
 		mMainLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-		mMainLayout.setScrimColor(this.getResources().getColor(R.color.item));
+		mMainLayout.setScrimColor(this.getResources().getColor(R.color.scrim_bg));
 		setDrawerActionBarToggle();
 	}
 

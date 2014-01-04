@@ -55,5 +55,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#fff"
         android:padding="4dp" />
+    
+    
+    <View
+        android:id="@+id/sub_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:background="#4033b5e5" >
+    </View>
 
 </FrameLayout>
