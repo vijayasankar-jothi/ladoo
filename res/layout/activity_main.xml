@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_layout_with_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
      >
 
     <!-- The main content view -->
+    
+    <com.google.android.gms.ads.AdView android:id="@+id/adView" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        ads:adUnitId="8205657858" 
+        ads:adSize="BANNER"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

@@ -17,7 +17,7 @@ public class GameActivity extends Activity {
 	ViewHolder vh;
 	int try_count = 0;
 	String pay_text="";
-	int thepuzzles[] = {R.drawable.puzzle1,R.drawable.puzzle2,R.drawable.puzzle3,R.drawable.puzzle4,R.drawable.puzzle5,R.drawable.puzzle6,R.drawable.puzzle7,R.drawable.puzzle8,R.drawable.puzzle9,R.drawable.puzzle10,R.drawable.puzzle11,R.drawable.puzzle12};
+	int thepuzzles[] = {R.drawable.img_one,R.drawable.img_two,R.drawable.img_three,R.drawable.img_four,R.drawable.img_five,R.drawable.img_six,R.drawable.img_seven,R.drawable.img_one,R.drawable.puzzle9,R.drawable.puzzle10,R.drawable.puzzle11,R.drawable.puzzle12};
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import android.app.Activity;
@@ -80,6 +82,10 @@ public class DetailView extends Activity {
 		ViewHolder vh = new ViewHolder();
 		setViewHolder(vh);
 		populateView(vh);
+//		AdView adView = (AdView)this.findViewById(R.id.adView);
+//	    AdRequest adRequest = new AdRequest.Builder().build();
+//	    adView.loadAd(adRequest);
+
 	}
 
 	@Override

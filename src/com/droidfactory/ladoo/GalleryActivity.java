@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.droidfactory.ladoo.adapter.GridAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class GalleryActivity extends Activity {
 
@@ -40,5 +42,8 @@ public class GalleryActivity extends Activity {
 			}
 		});
 		getActionBar().setTitle("Gallery");
+		AdView adView = (AdView)this.findViewById(R.id.adView);
+	    AdRequest adRequest = new AdRequest.Builder().addTestDevice("1D64F15F87B2DC32ADE92F50F5D2D010").build();
+	    adView.loadAd(adRequest);
 	}
 }

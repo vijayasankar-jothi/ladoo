@@ -4,6 +4,8 @@
     <string name="app_name">Overallsite</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-	<string name="drawer_close">Close</string>
+    <string name="drawer_close">Close</string>
     <string name="drawer_open">Open</string>
+    <string name="title_activity_trailers_view">Trailers</string>
+
 </resources>

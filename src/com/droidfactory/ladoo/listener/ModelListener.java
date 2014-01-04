@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.droidfactory.ladoo.R;
 import com.droidfactory.ladoo.fragment.MainFragment;
 
 public class ModelListener implements AbsListView.MultiChoiceModeListener {
@@ -26,7 +27,7 @@ public class ModelListener implements AbsListView.MultiChoiceModeListener {
 	@Override
 	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 		MenuInflater inflater = mActivity.getMenuInflater();
-		//--inflater.inflate(R.menu.child, menu);
+		inflater.inflate(R.menu.context_events, menu);
 
 		activeMode = mode;
 		return true;

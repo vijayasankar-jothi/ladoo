@@ -3,6 +3,7 @@ package com.droidfactory.ladoo.fragment;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,19 +15,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.util.SparseBooleanArray;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.droidfactory.ladoo.DetailView;
 import com.droidfactory.ladoo.MainActivity;
@@ -40,6 +48,8 @@ import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.listener.ModelListener;
 import com.droidfactory.ladoo.object.ParentObject;
 import com.droidfactory.ladoo.task.ChildListLoader;
+import com.haarman.listviewanimations.itemmanipulation.AnimateDismissAdapter;
+import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingRightInAnimationAdapter;
 import com.viewpagerindicator.LinePageIndicator;
@@ -64,7 +74,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout = super.onCreateView(inflater, container, savedInstanceState);
-		ListView lv = (ListView) layout.findViewById(android.R.id.list);
+		lv = (ListView) layout.findViewById(android.R.id.list);
 
 		ViewGroup parent = (ViewGroup) lv.getParent();
 		int lvIndex = parent.indexOfChild(lv);
@@ -94,94 +104,33 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 			rows.add(dummyObj);
 		}
 
-//		boolean showPager = false;
-//		TAB_ID.clear();
-//		TAB_TITLE.clear();
-//
-//		if (parent_id == 0) {
-//			showPager = true;
-//			TAB_ID.add("101");
-//			TAB_ID.add("102");
-//			TAB_ID.add("103");
-//
-//			TAB_TITLE.add("Movie");
-//			TAB_TITLE.add("Celebrity");
-//			TAB_TITLE.add("Game");
-//		} else if (parent_id == 1) {
-//			showPager = true;
-//			TAB_ID.add("201");
-//			TAB_ID.add("202");
-//			TAB_ID.add("203");
-//
-//			TAB_TITLE.add("Movie Premieres");
-//			TAB_TITLE.add("Oscars");
-//			TAB_TITLE.add("Cannes");
-//		} else if (parent_id == 2) {
-//			showPager = true;
-//			TAB_ID.add("301");
-//			TAB_ID.add("302");
-//			TAB_ID.add("303");
-//
-//			TAB_TITLE.add("Celebrity");
-//			TAB_TITLE.add("Paparazzi");
-//			TAB_TITLE.add("Stills");
-//		} else if (parent_id == 7) {
-//			showPager = true;
-//			TAB_ID.add("401");
-//			TAB_ID.add("402");
-//
-//			TAB_TITLE.add("Movie Reviews");
-//			TAB_TITLE.add("Games Reviews");
-//		}
-//
-//		if (showPager) {
-//			final ActionBar actionBar = this.getActivity().getActionBar();
-//			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//
-//			NewParentAdapter mNewTripPagerAdapter = new NewParentAdapter(this.getActivity().getSupportFragmentManager(), TAB_ID, TAB_TITLE);
-//			final ViewPager mViewPager = (ViewPager) ((Activity) this.getActivity()).findViewById(R.id.pager);
-//			mViewPager.setAdapter(mNewTripPagerAdapter);
-//
-//			mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//				@Override
-//				public void onPageSelected(int position) {
-//					// When swiping between pages, select the
-//					// corresponding tab.
-//					MainFragment.this.getActivity().getActionBar().setSelectedNavigationItem(position);
-//				}
-//			});
-//
-//			// Create a tab listener that is called when the user changes tabs.
-//			ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-//
-//				@Override
-//				public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
-//					// TODO Auto-generated method stub
-//					int position = tab.getPosition();
-//					mViewPager.setCurrentItem(position);
-//
-//				}
-//
-//				@Override
-//				public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//			};
-//
-//			// Add 3 tabs, specifying the tab's text and TabListener
-//			for (int i = 0; i < TAB_TITLE.size(); i++) {
-//				actionBar.addTab(actionBar.newTab().setText((String) TAB_TITLE.get(i)).setTabListener(tabListener));
-//			}
-//		}
-
 		return layout;
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = ((Activity) mContext).getMenuInflater();
+		inflater.inflate(R.menu.context_events, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		long long_val = info.id + 1;// plus one for gingerbread
+		int int_val = (int) long_val;
+		lv.setItemChecked(int_val, true);
+		List<JSONObject> readList = new LinkedList<JSONObject>(); 
+		SparseBooleanArray checked = getListView().getCheckedItemPositions();
+		for (int i = 0; i < checked.size(); i++) {
+			if (checked.valueAt(i)) {
+				int position = checked.keyAt(i);
+				JSONObject getdata = rows.get(position);
+				rows.remove(position);
+				readList.add(getdata);
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -224,6 +173,8 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 
 	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two, R.drawable.img_three, R.drawable.img_four };
 	private EventsAdapter adapter;
+	private SwingBottomInAnimationAdapter swingBottomInAnimationAdapter;
+	private AnimateDismissAdapter mAnimateDismissAdapter;
 
 	private void viewPagerView(final View rootView) {
 		ViewPager mViewPager;
@@ -273,11 +224,29 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 	}
 
 	public void performActions(ListView lv, MenuItem item) {
-		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this.getListAdapter());
-		SparseBooleanArray checked = lv.getCheckedItemPositions();
-		switch (item.getItemId()) {
-			default:
-				break;
+		final List<JSONObject> readList = new LinkedList<JSONObject>(); 
+
+		SparseBooleanArray checked = getListView().getCheckedItemPositions();
+		List<Integer> selected = new LinkedList<Integer>();
+		for (int i = 0; i < checked.size(); i++) {
+			if (checked.valueAt(i)) {
+				int position = checked.keyAt(i);
+				JSONObject getdata = adapter.getItem(position-1);
+				selected.add(position - 1);
+				readList.add(getdata);
+			}
+		}
+		for(int j=0;j< readList.size();j++){
+		final int k =j;
+		final Animation animation = AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left);
+        adapter.getView(selected.get(k), null, lv).startAnimation(animation);
+        Handler handle = new Handler();
+        handle.postDelayed(new Runnable() {
+ 
+            public void run() {
+            	adapter.remove(readList.get(k));
+            }
+        }, 1000);
 		}
 	}
 
@@ -286,12 +255,14 @@ public class MainFragment extends ListFragment implements FragmentCommunicator, 
 		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(adapter);
 		// SwingRightInAnimationAdapter swingRightInAnimationAdapter = new
 		// SwingRightInAnimationAdapter(adapter);
-		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(swingRightInAnimationAdapter);
+		swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(swingRightInAnimationAdapter);
 		//
 		// swingBottomInAnimationAdapter.setAbsListView(getListView());
 		// Assign the ListView to the AnimationAdapter and vice versa
 		swingBottomInAnimationAdapter.setAbsListView(lv);
 		setListAdapter(swingBottomInAnimationAdapter);
+		
+
 		adapter.notifyDataSetChanged();
 	}
 

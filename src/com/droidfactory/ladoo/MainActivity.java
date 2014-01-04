@@ -24,6 +24,8 @@ import com.droidfactory.ladoo.adapter.DrawerAdapter;
 import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.fragment.MainFragment;
 import com.droidfactory.ladoo.object.ParentObject;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends FragmentActivity {
 
@@ -40,11 +42,12 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		enableDrawer();
-		
-
 		if (savedInstanceState == null) {
 			initFirstTimeLoader();
 		}
+		AdView adView = (AdView)this.findViewById(R.id.adView);
+	    AdRequest adRequest = new AdRequest.Builder().build();
+	    adView.loadAd(adRequest);
 
 	}
 
@@ -217,6 +220,12 @@ public class MainActivity extends FragmentActivity {
 				MainActivity.this.startActivity(intent);
 				break;
 
+			}
+			case 5: {
+				Intent trailersIntent = new Intent(getBaseContext(),TrailersView.class);
+				startActivity(trailersIntent);
+				break;
+				
 			}
 			default: {
 				mainFragment = new MainFragment();

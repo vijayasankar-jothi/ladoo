@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:ads="http://schemas.android.com/apk/res-auto"
    	android:id="@+id/parentView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,5 +24,11 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="invisible" />
+    
+      <com.google.android.gms.ads.AdView android:id="@+id/adView" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        ads:adUnitId="8205657858" 
+        ads:adSize="SMART_BANNER"/> 
 
 </RelativeLayout>
