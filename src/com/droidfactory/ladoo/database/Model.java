@@ -178,7 +178,7 @@ public class Model {
 	public ArrayList<ParentObject> getCategoriesObjectArray() {
 		int i = 0;
 		ArrayList<ParentObject> parentsArray = new ArrayList<ParentObject>();
-		String[] categories_in_drawer = {"News Updates","Events","Photos","Galleries","Top Celebs","Trailers","Reviews","Natural Beauties","Like Us on Facebook", "Follow Us on twitter"};
+		String[] categories_in_drawer = {"News Updates","Events","Photos","Galleries","Top Celebs","Trailers","Reviews","Natural Beauties","Like Us", "Follow Us"};
 		String[] categories_in_title = {"News Updates","Events","Photos","Galleries","Top Celebs","Trailers","Reviews","Natural Beauties", "Like Us on Facebook","Follow Us on twitter"};
 		for (String cat_name : categories_in_drawer) {
 			String title = categories_in_title[i];

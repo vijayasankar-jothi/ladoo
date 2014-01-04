@@ -9,8 +9,11 @@
     <TextView
         android:id="@+id/parent_name"
        	style="@style/DrawerText"
-       	android:typeface="monospace"
-       	android:padding="8dp"
+       	android:text="News update"
+       	android:drawableTop="@drawable/news"
+       	android:layout_gravity="center"
+       	android:textSize="14dp"
+       	android:padding="4dp"
        	/>
 
 </LinearLayout>

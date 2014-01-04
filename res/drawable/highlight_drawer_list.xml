@@ -4,5 +4,5 @@
     <item android:drawable="@color/highlight_pressed_drawer" android:state_pressed="true"/> <!-- on click state -->
     <item android:drawable="@color/highlight_pressed_drawer" android:state_focused="true"/> <!-- focused not visible-->
     <item android:drawable="@color/highlight_pressed_drawer" android:state_hovered="true"/> <!-- hovered  not visible-->
-    <item android:drawable="@android:color/transparent"/> <!-- default state -->
+    <item android:drawable="@color/drawer_bg"/> <!-- default state -->
 </selector>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_drawer_layout"
-    android:layout_width="200dp"
+    android:layout_width="140dp"
     android:layout_height="match_parent"
     android:background="@color/drawer_bg" 
     android:layout_gravity="start"
@@ -17,8 +17,6 @@
   		android:smoothScrollbar="true" 
         android:layout_gravity="start"
         android:scrollbars="none"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
         android:choiceMode="singleChoice" >
     </ListView>
 
