@@ -3,6 +3,7 @@
     <color name="app_bg">#DED5C6</color>
     <color name="item">#000</color>
     
+    <color name="actionbar_bg">#000</color>
     <color name="actionbar_text">#fff</color>
     
     <color name="row_bg">#4033b5e5</color>
@@ -16,6 +17,13 @@
     
     <color name="highlight_pressed_drawer">#000</color>
     <color name="highlight_activated_drawer">#000</color>
+    
+    <color name="tab_bg">#AA1C911C</color>  
+    <color name="tab_bar">#AAAB7318</color>  
+    <color name="tab_sel">#AAAB4B18</color>
+    <color name="tab_hover">#AA182CAB</color>
+    
+    
     
     
     

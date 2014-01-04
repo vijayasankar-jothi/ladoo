@@ -20,26 +20,33 @@
             android:id="@+id/header_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#4033b5e5"
-            android:paddingLeft="40dp"
+
+            android:layout_centerHorizontal="true"
+            android:background="#809933CC"
+            android:padding="8dp"
+             android:paddingLeft="40dp"
             android:paddingTop="10dp"
             android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#fff" />
 
         <ScrollView
             android:id="@+id/textAreaScroller"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/header_text"
             android:layout_x="0px"
+            android:background="@color/drawer_bg"
             android:scrollbars="vertical" >
 
             <TextView
                 android:id="@+id/desc_text"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#fff" />
         </ScrollView>
     </RelativeLayout>
 

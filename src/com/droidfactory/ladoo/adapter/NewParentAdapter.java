@@ -1,5 +1,7 @@
 package com.droidfactory.ladoo.adapter;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,12 +12,12 @@ import com.droidfactory.ladoo.fragment.NewParentFragment;
 public class NewParentAdapter extends FragmentStatePagerAdapter {
 	
 	private final int total_items;
-	private final String[] tab_titles;
-	private final int[] tab_ids;
+	private final ArrayList tab_titles;
+	private final ArrayList tab_ids;
 
-	public NewParentAdapter(FragmentManager fm,int[] tab_ids,String[] tab_titles) {
+	public NewParentAdapter(FragmentManager fm,ArrayList tab_ids,ArrayList tab_titles) {
 		super(fm);
-		this.total_items=tab_ids.length;
+		this.total_items=tab_ids.size();
 		this.tab_ids=tab_ids;
 		this.tab_titles=tab_titles;
 	}
@@ -25,7 +27,7 @@ public class NewParentAdapter extends FragmentStatePagerAdapter {
 		Fragment fragment = new NewParentFragment();
 		Bundle args = new Bundle();
 		args.putInt(NewParentFragment.ARG_POSITION, i);
-		args.putInt(NewParentFragment.ARG_TRANSPORT_TYPE, tab_ids[i]);
+		args.putString(NewParentFragment.ARG_TRANSPORT_TYPE, (String)tab_ids.get(i));
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -37,7 +39,7 @@ public class NewParentAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return tab_titles[position];
+		return (String)tab_titles.get(position);
 	}
 
 }

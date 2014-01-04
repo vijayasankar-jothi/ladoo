@@ -1,14 +1,10 @@
 package com.droidfactory.ladoo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.ActionBar;
-import android.content.ComponentName;
+import android.app.ActionBar.Tab;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +23,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.droidfactory.ladoo.adapter.DrawerAdapter;
+import com.droidfactory.ladoo.adapter.NewParentAdapter;
 import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.fragment.MainFragment;
 import com.droidfactory.ladoo.object.ParentObject;
@@ -45,6 +43,24 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		enableDrawer();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		if (savedInstanceState == null) {
 			initFirstTimeLoader();

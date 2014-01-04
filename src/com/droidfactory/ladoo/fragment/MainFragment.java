@@ -8,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,17 +37,16 @@ import com.droidfactory.ladoo.SwipeDismissListViewTouchListener;
 import com.droidfactory.ladoo.adapter.EventsAdapter;
 import com.droidfactory.ladoo.adapter.HighAdapter;
 import com.droidfactory.ladoo.adapter.MainAdapter;
+import com.droidfactory.ladoo.adapter.NewParentAdapter;
 import com.droidfactory.ladoo.database.Model;
 import com.droidfactory.ladoo.listener.ModelListener;
 import com.droidfactory.ladoo.object.ParentObject;
 import com.droidfactory.ladoo.task.ChildListLoader;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingRightInAnimationAdapter;
-import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.LinePageIndicator;
 
-public class MainFragment extends ListFragment implements FragmentCommunicator,
-		LoaderManager.LoaderCallbacks<ParentObject> {
+public class MainFragment extends ListFragment implements FragmentCommunicator, LoaderManager.LoaderCallbacks<ParentObject> {
 
 	private ListView lv;
 	public int parent_id = -1;
@@ -54,21 +55,23 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	private EditText new_child_edit;
 	private View new_child_save;
 	private LinkedList<JSONObject> rows;
-	String[] titles={"","3 Days to Kill","Kaley Cuoco","Welcome to Yesterday","Academy Awards","Best Film Trailers of All Times","Do Movie Critics Play a Significant..","Lady Gaga"};
-	String[] sub_titles={"","A dying Secret Service agent decides to retire..","looks sporty after leaving a gym in Sherman Oaks","A teenaged underdog gets accepted to MIT, only to..","It is always a sense of pride, power and fame when..","In this list one of the best trailers of all times..","The most commonly asked question yet very important..","Way to London Heathrow Airport (10 Images)"};
+	String[] titles = { "", "3 Days to Kill", "Kaley Cuoco", "Welcome to Yesterday", "Academy Awards", "Best Film Trailers of All Times", "Do Movie Critics Play a Significant..", "Lady Gaga" };
+	String[] sub_titles = { "", "A dying Secret Service agent decides to retire..", "looks sporty after leaving a gym in Sherman Oaks", "A teenaged underdog gets accepted to MIT, only to..",
+			"It is always a sense of pride, power and fame when..", "In this list one of the best trailers of all times..", "The most commonly asked question yet very important..",
+			"Way to London Heathrow Airport (10 Images)" };
+
+	ArrayList TAB_ID = new ArrayList();
+	ArrayList TAB_TITLE = new ArrayList();
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View layout = super.onCreateView(inflater, container,
-				savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View layout = super.onCreateView(inflater, container, savedInstanceState);
 		ListView lv = (ListView) layout.findViewById(android.R.id.list);
 
 		ViewGroup parent = (ViewGroup) lv.getParent();
 		int lvIndex = parent.indexOfChild(lv);
 		parent.removeViewAt(lvIndex);
-		RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(
-				R.layout.fragment_main, container, false);
+		RelativeLayout mLinearLayout = (RelativeLayout) inflater.inflate(R.layout.fragment_main, container, false);
 		parent.addView(mLinearLayout, lvIndex, lv.getLayoutParams());
 		rows = new LinkedList<JSONObject>();
 		ArrayList<Integer> images = new ArrayList<Integer>();
@@ -92,6 +95,94 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 			}
 			rows.add(dummyObj);
 		}
+
+//		boolean showPager = false;
+//		TAB_ID.clear();
+//		TAB_TITLE.clear();
+//
+//		if (parent_id == 0) {
+//			showPager = true;
+//			TAB_ID.add("101");
+//			TAB_ID.add("102");
+//			TAB_ID.add("103");
+//
+//			TAB_TITLE.add("Movie");
+//			TAB_TITLE.add("Celebrity");
+//			TAB_TITLE.add("Game");
+//		} else if (parent_id == 1) {
+//			showPager = true;
+//			TAB_ID.add("201");
+//			TAB_ID.add("202");
+//			TAB_ID.add("203");
+//
+//			TAB_TITLE.add("Movie Premieres");
+//			TAB_TITLE.add("Oscars");
+//			TAB_TITLE.add("Cannes");
+//		} else if (parent_id == 2) {
+//			showPager = true;
+//			TAB_ID.add("301");
+//			TAB_ID.add("302");
+//			TAB_ID.add("303");
+//
+//			TAB_TITLE.add("Celebrity");
+//			TAB_TITLE.add("Paparazzi");
+//			TAB_TITLE.add("Stills");
+//		} else if (parent_id == 7) {
+//			showPager = true;
+//			TAB_ID.add("401");
+//			TAB_ID.add("402");
+//
+//			TAB_TITLE.add("Movie Reviews");
+//			TAB_TITLE.add("Games Reviews");
+//		}
+//
+//		if (showPager) {
+//			final ActionBar actionBar = this.getActivity().getActionBar();
+//			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//
+//			NewParentAdapter mNewTripPagerAdapter = new NewParentAdapter(this.getActivity().getSupportFragmentManager(), TAB_ID, TAB_TITLE);
+//			final ViewPager mViewPager = (ViewPager) ((Activity) this.getActivity()).findViewById(R.id.pager);
+//			mViewPager.setAdapter(mNewTripPagerAdapter);
+//
+//			mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//				@Override
+//				public void onPageSelected(int position) {
+//					// When swiping between pages, select the
+//					// corresponding tab.
+//					MainFragment.this.getActivity().getActionBar().setSelectedNavigationItem(position);
+//				}
+//			});
+//
+//			// Create a tab listener that is called when the user changes tabs.
+//			ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+//
+//				@Override
+//				public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//
+//				@Override
+//				public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
+//					// TODO Auto-generated method stub
+//					int position = tab.getPosition();
+//					mViewPager.setCurrentItem(position);
+//
+//				}
+//
+//				@Override
+//				public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//			};
+//
+//			// Add 3 tabs, specifying the tab's text and TabListener
+//			for (int i = 0; i < TAB_TITLE.size(); i++) {
+//				actionBar.addTab(actionBar.newTab().setText((String) TAB_TITLE.get(i)).setTabListener(tabListener));
+//			}
+//		}
+
 		return layout;
 	}
 
@@ -106,22 +197,20 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		initListView(this.getView());
 		// Load data
 		initAdapters();
-		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
-				lv, new SwipeDismissListViewTouchListener.DismissCallbacks() {
-					@Override
-					public boolean canDismiss(int position) {
-						return true;
-					}
+		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(lv, new SwipeDismissListViewTouchListener.DismissCallbacks() {
+			@Override
+			public boolean canDismiss(int position) {
+				return true;
+			}
 
-					@Override
-					public void onDismiss(ListView listView,
-							int[] reverseSortedPositions) {
-						for (int position : reverseSortedPositions) {
-							rows.remove(position - 1);
-						}
-						adapter.notifyDataSetChanged();
-					}
-				});
+			@Override
+			public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+				for (int position : reverseSortedPositions) {
+					rows.remove(position - 1);
+				}
+				adapter.notifyDataSetChanged();
+			}
+		});
 		lv.setOnTouchListener(touchListener);
 		lv.setOnScrollListener(touchListener.makeScrollListener());
 	}
@@ -130,14 +219,12 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		lv = (ListView) rootView.findViewById(android.R.id.list);
 		enableModal(lv);
 		lv.setItemsCanFocus(true);
-		lv.addHeaderView(LayoutInflater.from(getActivity()).inflate(
-				R.layout.new_child, null));
+		lv.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.new_child, null));
 		viewPagerView(this.getView());
 		setListShown(false);
 	}
 
-	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two,
-			R.drawable.img_three, R.drawable.img_four };
+	private int imageArray[] = { R.drawable.img_one, R.drawable.img_two, R.drawable.img_three, R.drawable.img_four };
 	private EventsAdapter adapter;
 
 	private void viewPagerView(final View rootView) {
@@ -145,8 +232,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		HighAdapter pAdapter = new HighAdapter(mContext, imageArray);
 		mViewPager.setAdapter(pAdapter);
-		LinePageIndicator circleIndicator = (LinePageIndicator) rootView
-				.findViewById(R.id.indicator);
+		LinePageIndicator circleIndicator = (LinePageIndicator) rootView.findViewById(R.id.indicator);
 		circleIndicator.setViewPager(mViewPager);
 		mViewPager.setCurrentItem(0);
 	}
@@ -176,8 +262,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 			Model model = new Model(mContext);
 			Calendar cal_instance = Calendar.getInstance();
 			cal_instance.add(Calendar.MINUTE, 5);
-			model.addChildrens(desc, parent_id, cal_instance.getTimeInMillis(),
-					0, 0, 0);
+			model.addChildrens(desc, parent_id, cal_instance.getTimeInMillis(), 0, 0, 0);
 		}
 		new_child_edit.setText("");
 		new_child_save.setVisibility(View.GONE);
@@ -193,19 +278,17 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		MainAdapter mainAdapter = ((MainAdapter) MainFragment.this.getListAdapter());
 		SparseBooleanArray checked = lv.getCheckedItemPositions();
 		switch (item.getItemId()) {
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 
 	private void initAdapters() {
 		adapter = new EventsAdapter(this, R.layout.events_list, rows);
-		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(
-				adapter);
+		SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(adapter);
 		// SwingRightInAnimationAdapter swingRightInAnimationAdapter = new
 		// SwingRightInAnimationAdapter(adapter);
-		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-				swingRightInAnimationAdapter);
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(swingRightInAnimationAdapter);
 		//
 		// swingBottomInAnimationAdapter.setAbsListView(getListView());
 		// Assign the ListView to the AnimationAdapter and vice versa
@@ -231,8 +314,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	}
 
 	@Override
-	public void onLoadFinished(Loader<ParentObject> arg0,
-			ParentObject result_trip_obj) {
+	public void onLoadFinished(Loader<ParentObject> arg0, ParentObject result_trip_obj) {
 		if (isResumed()) {
 			setListShown(true);
 		} else {
@@ -252,8 +334,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		Intent intent = new Intent(getActivity(), DetailView.class);
 		intent.putExtra("position", position);
 		getActivity().startActivity(intent);
-		((Activity) mContext).overridePendingTransition(R.anim.slideinleft,
-				R.anim.slideoutleft);
+		((Activity) mContext).overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
 	}
 
 	public void onDeleted() {

@@ -14,23 +14,35 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-         <item name="android:actionBarStyle">@style/CustomActionBar</item> <!-- Action Bar style -->
+        <item name="android:actionBarStyle">@style/CustomActionBar</item> <!-- Action Bar style -->
+        <item name="android:actionBarTabStyle">@style/MyActionBarTabs</item>
+        <item name="android:actionBarTabTextStyle">@style/customActionBarTabTextStyle</item>
+    </style>
+
+    <style name="MyActionBarTabs" parent="@android:style/Widget.Holo.ActionBar.TabView">
+
+        <!-- tab indicator -->
+        <item name="android:background">@drawable/tab_indicator_ab_ladoo</item>
+    </style>
+
+    <style name="customActionBarTabTextStyle">
+            <item name="android:textColor">@android:color/black</item>
     </style>
     
     <style name="CustomActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:titleTextStyle">@style/CustomActionBar.TitleTextStyle</item>
-        <item name="android:background">@color/highlight_activated_drawer</item>
+        <item name="android:background">@drawable/ab_background_textured_ladoo</item>
     </style>
-    
+
     <style name="CustomActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:textColor">@color/actionbar_text</item>
         <item name="android:capitalize">words</item>
     </style>
-    
-    
-     <style name="MainRowText">
+
+    <style name="MainRowText">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -58,18 +70,19 @@
         <item name="android:isScrollContainer">true</item>
         <item name="android:paddingLeft">@dimen/default_item_padding</item>
     </style>
-    
-     <style name="MainRowStatusImg">
+
+    <style name="MainRowStatusImg">
         <item name="android:layout_width">@dimen/default_item_padding</item>
         <item name="android:layout_height">@dimen/default_item_padding</item>
         <item name="android:padding">@dimen/default_page_padding</item>
         <item name="android:background">@color/item</item>
     </style>
 
-     <style name="DrawerText">
+    <style name="DrawerText">
         <item name="android:textColor">@color/drawer_item</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
+
 </resources>
