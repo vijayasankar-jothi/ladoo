@@ -71,6 +71,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		parent.addView(mLinearLayout, lvIndex, lv.getLayoutParams());
 		rows = new LinkedList<JSONObject>();
 		ArrayList<Integer> images = new ArrayList<Integer>();
+		images.add(R.drawable.img_five);
 		images.add(R.drawable.img_one);
 		images.add(R.drawable.img_two);
 		images.add(R.drawable.img_three);
@@ -78,7 +79,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		images.add(R.drawable.img_five);
 		images.add(R.drawable.img_six);
 		images.add(R.drawable.img_seven);
-		for (int i = 0; i <= 6; i++) {
+		for (int i = 1; i <= 7; i++) {
 			JSONObject dummyObj = new JSONObject();
 			try {
 				dummyObj.put("title", titles[i]);
