@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.support.v4.view.ViewPager;
 
 public class HighAdapter extends PagerAdapter {
@@ -24,10 +25,10 @@ public class HighAdapter extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-		FrameLayout frame = new FrameLayout(mContext);
 		ImageView imageView = new ImageView(mContext);
-			imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			imageView.setImageResource(imageArray[position]);
+		imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		imageView.setImageResource(imageArray[position]);
+		imageView.setScaleType(ScaleType.FIT_XY);
 		((ViewPager) container).addView(imageView, 0);
 		return imageView;
 	}

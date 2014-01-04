@@ -42,6 +42,7 @@ import com.droidfactory.ladoo.task.ChildListLoader;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.SwingRightInAnimationAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.LinePageIndicator;
 
 public class MainFragment extends ListFragment implements FragmentCommunicator,
 		LoaderManager.LoaderCallbacks<ParentObject> {
@@ -144,7 +145,7 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		HighAdapter pAdapter = new HighAdapter(mContext, imageArray);
 		mViewPager.setAdapter(pAdapter);
-		CirclePageIndicator circleIndicator = (CirclePageIndicator) rootView
+		LinePageIndicator circleIndicator = (LinePageIndicator) rootView
 				.findViewById(R.id.indicator);
 		circleIndicator.setViewPager(mViewPager);
 		mViewPager.setCurrentItem(0);
