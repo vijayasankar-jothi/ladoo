@@ -53,6 +53,8 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 	private EditText new_child_edit;
 	private View new_child_save;
 	private LinkedList<JSONObject> rows;
+	String[] titles={"","3 Days to Kill","Kaley Cuoco","Welcome to Yesterday","Academy Awards","Best Film Trailers of All Times","Do Movie Critics Play a Significant..","Lady Gaga"};
+	String[] sub_titles={"","A dying Secret Service agent decides to retire..","looks sporty after leaving a gym in Sherman Oaks","A teenaged underdog gets accepted to MIT, only to..","It is always a sense of pride, power and fame when..","In this list one of the best trailers of all times..","The most commonly asked question yet very important..","Way to London Heathrow Airport (10 Images)"};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,8 +81,8 @@ public class MainFragment extends ListFragment implements FragmentCommunicator,
 		for (int i = 0; i <= 6; i++) {
 			JSONObject dummyObj = new JSONObject();
 			try {
-				dummyObj.put("title", "Title " + i);
-				dummyObj.put("sub_title", "Sub Title " + i);
+				dummyObj.put("title", titles[i]);
+				dummyObj.put("sub_title", sub_titles[i]);
 				dummyObj.put("image_id", images.get(i));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

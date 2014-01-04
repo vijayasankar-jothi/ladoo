@@ -1,14 +1,22 @@
 package com.droidfactory.ladoo;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 public class DetailView extends Activity {
@@ -19,7 +27,9 @@ public class DetailView extends Activity {
 	ArrayList<String> article_contents;
 	ArrayList<Integer> article_images;
 	private int position;
-
+	String[] titles = {"","3 Days to Kill","Kaley Cuoco","Welcome to Yesterday","Academy Awards","Best Film Trailers of All Times","Do Movie Critics Play a Significant..","Lady Gaga"};
+	private ShareActionProvider mShareActionProvider;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +57,7 @@ public class DetailView extends Activity {
 				+ "\n"
 				+ "Radar previously reported that Fey and Poehler would take home as much multi-million dollar packages after hosting the event. A source also said “Tina and Amy decided to ask for the craziest package ever given to award hosts,” The news also informs that each are being paid more than any Oscar host in the history with the exception of Billy Crystal. The ladies are also getting large numbers of perks and packages including the use of NBC/Comcast private planes as they prepare for the awards and full freight on their entourages, who will be backstage to support during the live broadcasts. Truly, the ladies have taken full advantage of the show makers as they realized the importance and need of their flawless act.";
 		String article_content_seven = "Truly, winning an Academy Award or simply being nominated for one is considered to be a significant achievement by most members of professions associated with making movies. For each and all, an award brings peer recognition, fame, prestige, pride, power and sometimes dramatic financial gains. Several indicate the financial benefits enjoyed as a result of being nominated for an Academy Award. The recent statistics also confirm that in the last 15 years, the increased revenues from winning an Academy Award for best Picture have been estimated at $ 5,000,000 to $30,000,000 in the United States and Canada.";
+		article_contents.add(article_content_seven);
 		article_contents.add(article_content_one);
 		article_contents.add(article_content_two);
 		article_contents.add(article_content_three);
@@ -54,6 +65,7 @@ public class DetailView extends Activity {
 		article_contents.add(article_content_five);
 		article_contents.add(article_content_six);
 		article_contents.add(article_content_seven);
+		article_images.add(R.drawable.img_five);
 		article_images.add(R.drawable.img_one);
 		article_images.add(R.drawable.img_two);
 		article_images.add(R.drawable.img_three);
@@ -67,8 +79,38 @@ public class DetailView extends Activity {
 		populateView(vh);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.details, menu);
+		MenuItem shareItem = menu.findItem(R.id.menu_share);
+	    mShareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
+	    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+	    shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		shareIntent.putExtra(Intent.EXTRA_SUBJECT, titles[position]);
+		shareIntent.putExtra(Intent.EXTRA_TEXT, article_contents.get(position));
+	    shareIntent.setType("*/*");
+	    mShareActionProvider.setShareIntent(shareIntent);
+	
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	private Intent getDefaultIntent() {
+	    Intent intent = new Intent(Intent.ACTION_SEND);
+	    intent.setType("image/*");
+	    return intent;
+	}
+	
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// fragmentCommunicator not allowed to call when mPager is active
+		
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
 	private void populateView(ViewHolder vh) {
-		vh.txt1.setText("Title");
+		vh.txt1.setText(titles[position]);
 		vh.txt2.setText(article_contents.get(position));
 		vh.image_one.setImageDrawable(getResources().getDrawable(
 				article_images.get(position)));
